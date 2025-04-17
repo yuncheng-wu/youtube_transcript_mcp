@@ -1,0 +1,7 @@
+youtube_transcript_api
+pytubefix
+SpeechRecognition
+pydub
+fastapi
+uvicorn
+mcp-python
