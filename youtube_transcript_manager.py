@@ -2,8 +2,6 @@ from typing import Optional, List
 from youtube_audio import YouTubeAudioManager
 from youtube_transcript import YouTubeTranscriptExtractor
 from mcp.server.fastmcp import FastMCP
-from mcp.server.tool import mcp
-from fastapi import FastAPI
 import uvicorn
 
 class YouTubeTranscriptManager:
@@ -60,9 +58,7 @@ class YouTubeTranscriptManager:
         except Exception as e:
             raise Exception(f"Failed to get transcript: {str(e)}")
 
-# Create FastAPI app and MCP server
-app = FastAPI()
-mcp_server = FastMCP(app)
+mcp = FastMCP()
 
 @mcp.tool()
 async def get_youtube_transcript(url: str, languages: Optional[List[str]] = None, use_audio: bool = False) -> str:
