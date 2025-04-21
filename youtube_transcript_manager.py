@@ -79,7 +79,7 @@ async def get_youtube_transcript(url: str, languages: Optional[List[str]] = None
 
 def main():
     """Start the MCP server"""
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    mcp.run(transport='stdio')
 
 if __name__ == "__main__":
     main()
