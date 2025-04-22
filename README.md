@@ -75,12 +75,13 @@ If subtitles are unavailable or explicitly requested, the system will:
 
 - Python 3.8 or higher
 - `uv` package manager or `npm` package manager
+- **FFmpeg**: Required for audio processing (used by `pydub`)
 
 ### Dependencies
 - `youtube_transcript_api`: For subtitle extraction
 - `pytubefix`: For downloading YouTube audio
 - `SpeechRecognition`: For audio transcription
-- `pydub`: For audio processing
+- `pydub`: For audio processing (requires FFmpeg)
 - `mcp-python`: For MCP server implementation
 
 ### Installation
@@ -96,6 +97,11 @@ cd youtube_transcript_mcp
 uv venv
 uv pip install -r requirements.txt
 ```
+
+3. Install FFmpeg:
+   - **Windows**: Download FFmpeg from [https://ffmpeg.org/download.html](https://ffmpeg.org/download.html), extract it, and add the `bin` folder to your system's PATH.
+   - **macOS**: Use Homebrew: `brew install ffmpeg`
+   - **Linux**: Use your package manager, e.g., `sudo apt install ffmpeg` (Debian/Ubuntu)
 
 ### Running the Server
 
