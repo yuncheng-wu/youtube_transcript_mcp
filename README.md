@@ -79,11 +79,6 @@ If subtitles are unavailable or explicitly requested, the system will:
    Process Each Chunk → Combine Transcriptions
    ```
 
-4. **Error Handling and Cleanup**
-   ```
-   Manage Temp Files → Handle Errors → Return Results
-   ```
-
 ### Component Interaction
 
 1. **YouTubeTranscriptManager** (Main Controller)
