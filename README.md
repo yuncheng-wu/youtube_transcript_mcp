@@ -5,7 +5,7 @@ A Python-based MCP (Model Control Protocol) server that provides a robust soluti
 ## Table of Contents
 * [What It Does](#what-it-does)
 * [Project Architecture](#project-architecture)
-* [Getting Started](#getting-started)
+* [Quick Started](#quick-started)
 * [Usage](#usage)
 
 ## What It Does
@@ -33,33 +33,6 @@ If subtitles are unavailable or explicitly requested, the system will:
 - Error handling for various failure scenarios
 
 ## Project Architecture
-
-### Package Overview
-
-1. **youtube_transcript_api**
-   - Primary package for extracting YouTube subtitles
-   - Handles subtitle retrieval in multiple languages
-   - Manages subtitle format conversion
-
-2. **pytubefix**
-   - YouTube video downloader library
-   - Handles audio stream extraction
-   - Manages video URL parsing and validation
-
-3. **SpeechRecognition**
-   - Provides speech-to-text functionality
-   - Integrates with Google Speech Recognition API
-   - Processes audio data for transcription
-
-4. **pydub**
-   - Audio processing library
-   - Handles audio format conversion
-   - Manages audio chunking for large files
-
-5. **mcp-python**
-   - Model Control Protocol implementation
-   - Provides server infrastructure
-   - Enables AI assistant integration
 
 ### Project Workflow
 
@@ -96,7 +69,7 @@ If subtitles are unavailable or explicitly requested, the system will:
    - Manages audio processing
    - Handles speech recognition
 
-## Getting Started
+## Quick Started
 
 ### Prerequisites
 
@@ -153,7 +126,7 @@ To use this server with Claude for Desktop, add the following to your Claude con
 
 Replace `PATH_TO_YOUR_PROJECT_FOLDER` with the absolute path to your project directory.
 
-## Usage
+## MCP Server Usage
 
 The server provides a single powerful tool `get_youtube_transcript` with the following parameters:
 
@@ -188,12 +161,3 @@ transcript = await get_youtube_transcript(
 )
 ```
 
-### Error Handling
-
-The tool handles various error scenarios:
-- Invalid YouTube URLs
-- Unavailable subtitles
-- Failed audio downloads
-- Transcription errors
-
-Each error case returns a descriptive error message to help diagnose issues.
