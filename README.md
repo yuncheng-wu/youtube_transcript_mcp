@@ -2,6 +2,12 @@
 
 A Python-based MCP (Model Control Protocol) server that provides a robust solution for extracting transcripts from YouTube videos using both subtitle-based and audio-based transcription methods. This project enables AI assistants to easily obtain transcripts from any YouTube video through a standardized interface.
 
+## Table of Contents
+* [What It Does](#what-it-does)
+* [Project Architecture](#project-architecture)
+* [Getting Started](#getting-started)
+* [Usage](#usage)
+
 ## What It Does
 
 This MCP server provides a dual-approach transcription system:
@@ -26,12 +32,81 @@ If subtitles are unavailable or explicitly requested, the system will:
 - Temporary file management for audio processing
 - Error handling for various failure scenarios
 
+## Project Architecture
+
+### Package Overview
+
+1. **youtube_transcript_api**
+   - Primary package for extracting YouTube subtitles
+   - Handles subtitle retrieval in multiple languages
+   - Manages subtitle format conversion
+
+2. **pytubefix**
+   - YouTube video downloader library
+   - Handles audio stream extraction
+   - Manages video URL parsing and validation
+
+3. **SpeechRecognition**
+   - Provides speech-to-text functionality
+   - Integrates with Google Speech Recognition API
+   - Processes audio data for transcription
+
+4. **pydub**
+   - Audio processing library
+   - Handles audio format conversion
+   - Manages audio chunking for large files
+
+5. **mcp-python**
+   - Model Control Protocol implementation
+   - Provides server infrastructure
+   - Enables AI assistant integration
+
+### Project Workflow
+
+1. **Input Processing**
+   ```
+   YouTube URL → URL Validation → Video ID Extraction
+   ```
+
+2. **Subtitle-based Transcription (Primary Path)**
+   ```
+   Check Subtitles → Extract Subtitles → Format Text
+   ```
+
+3. **Audio-based Transcription (Fallback Path)**
+   ```
+   Download Audio → Convert Format → Split into Chunks → 
+   Process Each Chunk → Combine Transcriptions
+   ```
+
+4. **Error Handling and Cleanup**
+   ```
+   Manage Temp Files → Handle Errors → Return Results
+   ```
+
+### Component Interaction
+
+1. **YouTubeTranscriptManager** (Main Controller)
+   - Coordinates the transcription process
+   - Manages fallback between subtitle and audio methods
+   - Handles error reporting
+
+2. **YouTubeTranscriptExtractor** (Subtitle Handler)
+   - Processes YouTube URLs
+   - Extracts video IDs
+   - Manages subtitle retrieval
+
+3. **YouTubeAudioManager** (Audio Handler)
+   - Downloads audio content
+   - Manages audio processing
+   - Handles speech recognition
+
 ## Getting Started
 
 ### Prerequisites
 
 - Python 3.8 or higher
-- `uv` package manager
+- `uv` package manager or `npm` package manager
 
 ### Dependencies
 - `youtube_transcript_api`: For subtitle extraction
