@@ -13,10 +13,9 @@ A Python-based MCP (Model Control Protocol) server that provides a robust soluti
 This MCP server provides a dual-approach transcription system:
 
 ### Primary Method: Subtitle-based Transcription
-- Automatically extracts available subtitles from YouTube videos
+- Extracts available subtitles from YouTube videos
 - Supports multiple language preferences
 - Uses the `youtube_transcript_api` for efficient subtitle extraction
-- Handles various YouTube URL formats (standard watch URLs, shortened youtu.be links, embed URLs)
 
 ### Fallback Method: Audio-based Transcription
 If subtitles are unavailable or explicitly requested, the system will:
@@ -25,32 +24,7 @@ If subtitles are unavailable or explicitly requested, the system will:
 - Process the audio in chunks using Google Speech Recognition
 - Generate a transcript from the spoken content
 
-### Key Features
-- Automatic fallback from subtitles to audio transcription
-- Support for multiple language preferences in subtitles
-- Efficient handling of large videos through chunked audio processing
-- Temporary file management for audio processing
-- Error handling for various failure scenarios
-
 ## Project Architecture
-
-### Project Workflow
-
-1. **Input Processing**
-   ```
-   YouTube URL → URL Validation → Video ID Extraction
-   ```
-
-2. **Subtitle-based Transcription (Primary Path)**
-   ```
-   Check Subtitles → Extract Subtitles → Format Text
-   ```
-
-3. **Audio-based Transcription (Fallback Path)**
-   ```
-   Download Audio → Convert Format → Split into Chunks → 
-   Process Each Chunk → Combine Transcriptions
-   ```
 
 ### Component Interaction
 

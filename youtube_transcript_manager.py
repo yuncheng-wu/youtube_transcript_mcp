@@ -1,8 +1,6 @@
 from typing import Optional, List
 from youtube_audio import YouTubeAudioManager
 from youtube_transcript import YouTubeTranscriptExtractor
-from mcp.server.fastmcp import FastMCP
-import uvicorn
 
 class YouTubeTranscriptManager:
     """
@@ -27,19 +25,19 @@ class YouTubeTranscriptManager:
             ValueError: If the YouTube URL is invalid
             Exception: If transcription fails
         """
-        # Get video ID from URL
-        video_id = YouTubeTranscriptExtractor.get_youtube_video_id(url)
-        if not video_id:
-            raise ValueError("Invalid YouTube URL")
+        
 
         # First try to get transcript from subtitles
         if not use_audio:
-            print("Trying subtitle-based transcription...")
-            transcript = YouTubeTranscriptExtractor.get_transcript(video_id, languages)
-            if transcript:
-                print("Subtitles found, using subtitle-based transcription...")
-                return transcript
-            print("No subtitles available, falling back to audio-based transcription...")
+            # Get video ID from URL
+            video_id = YouTubeTranscriptExtractor.get_youtube_video_id(url)
+            if video_id:
+                print("Trying subtitle-based transcription...")
+                transcript = YouTubeTranscriptExtractor.get_transcript(video_id, languages)
+                if transcript:
+                    print("Subtitles found, using subtitle-based transcription...")
+                    return transcript
+                print("No subtitles available, falling back to audio-based transcription...")
 
         # If subtitles are not available or failed, use audio-based transcription
         print("Using audio-based transcription...")
@@ -58,9 +56,6 @@ class YouTubeTranscriptManager:
         except Exception as e:
             raise Exception(f"Failed to get transcript: {str(e)}")
 
-mcp = FastMCP()
-
-@mcp.tool()
 async def get_youtube_transcript(url: str, languages: Optional[List[str]] = None, use_audio: bool = False) -> str:
     """Get transcript from a YouTube video using either subtitles or audio transcription.
     
@@ -77,9 +72,16 @@ async def get_youtube_transcript(url: str, languages: Optional[List[str]] = None
     except Exception as e:
         raise Exception(f"Failed to get transcript: {str(e)}")
 
-def main():
-    """Start the MCP server"""
-    mcp.run(transport='stdio')
+async def test_get_youtube_transcript():
+    try:
+        transcript = await get_youtube_transcript("https://www.youtube.com/watch?v=dQw4w9WgXcQ", use_audio=True)
+        assert transcript != "", "Transcript should not be empty"
+        print(f"Test passed! Transcript length: {len(transcript)} characters")
+        return True
+    except Exception as e:
+        print(f"Test failed: {str(e)}")
+        return False
 
 if __name__ == "__main__":
-    main()
+    import asyncio
+    asyncio.run(test_get_youtube_transcript())
